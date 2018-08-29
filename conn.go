@@ -443,3 +443,18 @@ func (c *Conn) Write(buf []byte) (int, error) {
 	}
 	return n, err
 }
+
+func (c *Conn) WriteRaw(buf []byte) (int, error) {
+	var (
+		n   int
+		err error
+	)
+	if len(buf) > 0 {
+		var k int
+
+		k, err = c.Conn.Write(buf)
+		n += k
+
+	}
+	return n, err
+}
