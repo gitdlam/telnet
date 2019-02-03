@@ -348,6 +348,14 @@ func (c *Conn) ReadString(delim byte) (string, error) {
 	return string(bytes), err
 }
 
+func (c *Conn) SkipNextResponse() error {
+	for {
+		_, err := c.ReadByte()
+		if err != nil {
+			return err
+		}
+	}
+}
 func (c *Conn) readUntil(read bool, delims ...string) ([]byte, int, error) {
 	if len(delims) == 0 {
 		return nil, 0, nil
